@@ -1,1 +1,1 @@
-web: python contact_handler.py
+web: gunicorn contact_handler:app
