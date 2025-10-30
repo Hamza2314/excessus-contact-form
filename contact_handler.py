@@ -17,7 +17,7 @@ EMAIL = os.getenv('EMAIL', 'kontakt@excessus.de')
 PASSWORD = os.getenv('PASSWORD')
 
 def send_email(to_email, subject, body):
-    """Helper function to send emails via Zoho"""
+    """Helper function to send emails via SMTP2GO"""
     msg = MIMEMultipart()
     msg['From'] = EMAIL
     msg['To'] = to_email
@@ -28,7 +28,7 @@ def send_email(to_email, subject, body):
     try:
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
-        server.login(SMTP_USERNAME, PASSWORD)
+        server.login(SMTP_USERNAME, PASSWORD)  # ← This line MUST use SMTP_USERNAME
         server.send_message(msg)
         server.quit()
         return True
@@ -123,4 +123,5 @@ def home():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
 
