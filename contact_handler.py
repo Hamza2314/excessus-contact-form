@@ -10,8 +10,9 @@ CORS(app)  # Allow requests from your website
 
 # Zoho SMTP settings
 
-SMTP_SERVER = os.getenv('SMTP_SERVER', 'smtp.zoho.eu')
-SMTP_PORT = int(os.getenv('SMTP_PORT', 587))
+SMTP_SERVER = os.getenv('SMTP_SERVER', 'mail.smtp2go.com')
+SMTP_PORT = int(os.getenv('SMTP_PORT', 2525))
+SMTP_USERNAME = os.getenv('SMTP_USERNAME', 'excessus.de')
 EMAIL = os.getenv('EMAIL', 'kontakt@excessus.de')
 PASSWORD = os.getenv('PASSWORD')
 
@@ -27,7 +28,7 @@ def send_email(to_email, subject, body):
     try:
         server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
         server.starttls()
-        server.login(EMAIL, PASSWORD)
+        server.login(SMTP_USERNAME, PASSWORD)
         server.send_message(msg)
         server.quit()
         return True
@@ -122,3 +123,4 @@ def home():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
+
